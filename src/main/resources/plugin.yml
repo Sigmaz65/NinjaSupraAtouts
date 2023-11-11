@@ -4,3 +4,7 @@ main: fr.sigmaz.ninjasupraatouts.Main
 authors: [Sigmaz65]
 description: NinjaSupraAtouts Master Class
 website: https://sig.yt
+commands:
+  ninjaatouts:
+    description: Command atouts
+    aliases: [natouts, na, ninjaa, ninjasupraatouts, nsa, ninjaatout, ninjasupraatout]

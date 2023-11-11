@@ -1,0 +1,40 @@
+options:
+  prefix: "&5&lATOUTS &7|"
+
+items:
+  scepter:
+    type: BLAZE_ROD
+    display-name: "&d✷ &5&lSpectre de Téléportation &d✷"
+    lore:
+      - ''
+      - '&f&l&m--------&7&l&m------------&f&l&m--------'
+      - '&e✯✯✯✯&7✯ &c&lMYTHIQUE'
+      - ''
+      - ' &7&l▶ &fCe &esceptre &fvous permet de'
+      - '&fvous &btéléporter &faléatoirement'
+      - '&fdans un &drayon &fde &d13 &fblocs.'
+      - ''
+      - '&7◆ &fPropriétaire: &b&l%owner%'
+      - '&7◆ &fUtilisation: &a%uses%/5'
+      - ''
+      - '&f&l&m--------&7&l&m------------&f&l&m--------'
+    delay: 60
+    radius: 12
+    uses: 5
+    enchants:
+      ARROW_KNOCKBACK: 2
+      ARROW_INFINITE: 1
+      DURABILITY: 5
+
+messages:
+  scepter-use: "%prefix% &dTéléportation !"
+  scepter-broken: "%prefix% &cLe spectre de téléportation est cassé. &4(0/5)"
+  scepter-cooldown: "%prefix% &cAttendez %cooldown% %second% avant d'utiliser de nouveau votre atout."
+
+times:
+  hour: "heure"
+  hours: "heures"
+  minute: "minute"
+  minutes: "minutes"
+  second: "seconde"
+  seconds: "secondes"
