@@ -1,0 +1,6 @@
+name: NinjaSupraAtouts
+version: '${project.version}'
+main: fr.sigmaz.ninjasupraatouts.Main
+authors: [Sigmaz65]
+description: NinjaSupraAtouts Master Class
+website: https://sig.yt
