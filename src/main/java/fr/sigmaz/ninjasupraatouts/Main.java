@@ -1,5 +1,6 @@
 package fr.sigmaz.ninjasupraatouts;
 
+import fr.sigmaz.ninjasupraatouts.command.AtoutsCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,7 +26,8 @@ public final class Main extends JavaPlugin {
         saveDefaultConfig();
         getConfig().options().copyDefaults(true);
 
-
+        //commands
+        getCommand("ninjaatouts").setExecutor(new AtoutsCommand());
     }
 
     @Override
