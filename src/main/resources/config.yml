@@ -25,6 +25,16 @@ items:
       ARROW_KNOCKBACK: 2
       ARROW_INFINITE: 1
       DURABILITY: 5
+    craft:
+      it0: AIR
+      it1: ENDER_PEARL
+      it2: AIR
+      it3: AIR
+      it4: GOLD_INGOT
+      it5: AIR
+      it6: AIR
+      it7: BLAZE_ROD
+      it8: AIR
 
 messages:
   scepter-use: "%prefix% &dTéléportation !"

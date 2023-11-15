@@ -24,7 +24,7 @@ public class SpectreTp {
 
         int y = world.getHighestBlockYAt(x, z);
 
-        Location teleportLocation = new Location(world, x + 0.5, y+1, z + 0.5);
+        Location teleportLocation = new Location(world, x + 0.5, y+2, z + 0.5);
         player.teleport(teleportLocation);
 
         player.sendMessage(TextManager.formattedText(Main.getInstance().getConfig().getString("messages.scepter-use")));

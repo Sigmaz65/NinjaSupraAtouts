@@ -1,10 +1,17 @@
 package fr.sigmaz.ninjasupraatouts;
 
+import fr.sigmaz.ninjasupraatouts.Manager.CraftManager;
+import fr.sigmaz.ninjasupraatouts.Manager.ItemManager;
 import fr.sigmaz.ninjasupraatouts.command.AtoutsCommand;
+import fr.sigmaz.ninjasupraatouts.listener.CraftListeners;
 import fr.sigmaz.ninjasupraatouts.listener.ItemListeners;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -46,7 +53,12 @@ public final class Main extends JavaPlugin {
 
         //listeners
         getServer().getPluginManager().registerEvents(new ItemListeners(), this);
+        getServer().getPluginManager().registerEvents(new CraftListeners(), this);
+
+        //crafts
+        CraftManager.craftScepter();
     }
+
 
     @Override
     public void onDisable() {

@@ -14,11 +14,16 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.bukkit.potion.PotionEffectType.*;
 
 public class AtoutsCommand implements CommandExecutor {
     Boolean find = false;
@@ -85,61 +90,10 @@ public class AtoutsCommand implements CommandExecutor {
                         break;
                     }
 
-                    //display name
-                    String display_name = TextManager.formattedText(Main.getInstance().getConfig().getString("items." + the_item + ".display-name"));
-                    //lore
-                    List<String> lore = new ArrayList<>();
-                    for (String line : Main.getInstance().getConfig().getStringList("items." + the_item + ".lore")) {
-                        lore.add(line
-                                .replace("%owner%", argPlayer.getName())
-                                .replace("%kill%", "0")
-                                .replace("%last_kill%", "-")
-                                .replace("%uses%", Main.getInstance().getConfig().getString("items." + the_item + ".uses"))
-                                .replace("%skid_players%", "-")
-                                .replace("%block_broken%", "0")
-                                .replace("%points%", "0")
-                                .replace("%killed-mobs%", "0")
-                        );
-                    }
-                    //material
-                    Material material = Material.getMaterial(Main.getInstance().getConfig().getString("items." + the_item + ".type")) ;
-                    //enchantement
-                    if (getEnchantements(the_item) != null) {
-                        hasEnchant = true;
-                    }
 
-
-
-                    argPlayer.sendMessage(TextManager.formattedText("&2&l✔ &7&l◆ &aVous avez reçu " + display_name));
-                    ItemStack CustomItem = new ItemBuilder(material, 1).setDisplayName(display_name).setLoreWithList(lore).build(false);
-                    //add enchantements
-                    if (hasEnchant) {
-
-                        HashMap<String, Integer> enchantements = getEnchantements(the_item);
-
-                        if (enchantements != null) {
-                            ItemMeta CustomItemMeta = CustomItem.getItemMeta();
-
-                            for (Map.Entry<String, Integer> entry : enchantements.entrySet()) {
-                                String enchName = entry.getKey();
-                                int enchLvl = entry.getValue();
-                                Enchantment ench = Enchantment.getByName(enchName);
-
-                                CustomItemMeta.addEnchant(ench, enchLvl, true);
-                            }
-                            //def item meta
-                            CustomItem.setItemMeta(CustomItemMeta);
-                        } else {
-                            System.out.println("§4§l✘ §7§l◆ §cAucun enchantement trouvé pour cet objet.");
-                        }
-                    }
                     //give item
-                    argPlayer.getInventory().addItem(CustomItem);
-                    /*if (ItemManager.hasUsesInLore(CustomItem)){
-                        ItemManager.setUsesInLore(CustomItem, Main.getInstance().getConfig().getInt("items." + the_item + ".uses"));
-                    }
-                     */
-                    ItemManager.setUsesInLore(CustomItem, Main.getInstance().getConfig().getInt("items." + the_item + ".uses"));
+                    argPlayer.getInventory().addItem(ItemManager.getItem(the_item, argPlayer));
+
                     break;
                 }
                 s.sendMessage("§4§l✘ §7§l◆ §cIl ne peut pas avoir plus de 2 argument après §4/"+ cmd + " give§c.");
@@ -149,6 +103,19 @@ public class AtoutsCommand implements CommandExecutor {
                 s.sendMessage(TextManager.formattedText("&2&l✔ &7&l◆ &adata.yml rechargé."));
                 Main.getInstance().reloadConfig();
                 break;
+            case "test":
+                if (!(s instanceof Player)) {
+                    s.sendMessage("Cette commande ne peut être exécutée que par un joueur !");
+                    return true;
+                }
+
+                Player player = (Player) s;
+
+                ItemStack it = new ItemStack(Material.getMaterial(Main.getInstance().getConfig().getString("items.scepter.craft.it1")));
+
+                player.sendMessage(String.valueOf(Material.getMaterial(Main.getInstance().getConfig().getString("items.scepter.craft.it1"))));
+                player.getInventory().addItem(it);
+                return true;
         }
 
         return true;
@@ -168,5 +135,9 @@ public class AtoutsCommand implements CommandExecutor {
             return Enchantments;
         }
         return null;
+    }
+
+    private ItemStack createSpeedPotion() {
+        return new ItemStack(Material.POTION, 1, (short) 8194);
     }
 }
